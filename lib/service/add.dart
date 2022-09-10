@@ -1,12 +1,10 @@
 
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sw_festival/Auth/auth_service.dart';
 import 'package:sw_festival/HomePage.dart';
-import 'package:sw_festival/Page/MainScreen.dart';
 
 
 class kMyApp extends StatelessWidget {
@@ -74,12 +72,14 @@ class _MyHomePageState extends State<MyHomePage> {
       actions: [
         TextButton(
               onPressed: () async{
+                // uploadFile(_photo);
                  final Contents = <String, String>{ // 컨텐츠 구조화
                   'title' : TitleController.text,
                   'contents' : contentsController.text,
                   //  'photo' : _photo
                   }; 
-             contentsFunction(FirebaseAuth.instance.currentUser!.displayName!,Contents);
+                  
+             contentsFunction(FirebaseAuth.instance.currentUser!.displayName!,Contents,_photo);
              Navigator.push(
             context,
             MaterialPageRoute(
@@ -246,5 +246,7 @@ class _MyHomePageState extends State<MyHomePage> {
     },
   );
 }
+
+
 }
 

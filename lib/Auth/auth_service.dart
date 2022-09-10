@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -84,7 +85,17 @@ Future<void> signOut() async { // logOut 기능
     print('logOut');
   }
 
-contentsFunction(user, Contents) async { //파이어 베이스 저장
+contentsFunction(user, Contents,_photo) async { //파이어 베이스 저장
+ try{
+    final ref = FirebaseStorage.instance
+          .ref()
+          .child('file/')
+          .child(_photo+'jpg');
+          await ref.putFile(_photo);
+          final url = await ref.getDownloadURL();
+ } catch (e) {
+   print('사진 업로드 실패');
+ }
  await FirebaseFirestore.instance.collection('contents')
  .doc(user)
  .set(Contents)
@@ -93,6 +104,19 @@ contentsFunction(user, Contents) async { //파이어 베이스 저장
    }); 
 }
 
-UploadFile(_photo) {
-  
-}
+// Future uploadFile(_photo) async {
+//     if (_photo == null) return;
+//     final fileName = (_photo!.path);
+//     final destination = 'files/$fileName';
+//     try {
+//       final ref = FirebaseStorage.instance
+//           .ref()
+//           .child('file/')
+//           .child(_photo+'jpg');
+//           await ref.putFile(_photo);
+//           final url = await ref.getDownloadURL();
+//       //await ref.getDownloadURL();
+//     } catch (e) {
+//       print('사진 업로드 실패');
+//     }
+//   }
