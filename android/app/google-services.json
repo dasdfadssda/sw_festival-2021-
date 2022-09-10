@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "255144107325",
+    "project_id": "sw-festival-5954f",
+    "storage_bucket": "sw-festival-5954f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255144107325:android:78afca371c3d6589073954",
+        "android_client_info": {
+          "package_name": "com.example.sw_festival"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "255144107325-feq9suvp4mc8obuqr804ij6ni551ll15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC81Dr_XOuupgXiwlg_WBWzhkcQE0HfVVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "255144107325-feq9suvp4mc8obuqr804ij6ni551ll15.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "255144107325-f2ko14bg6h0pho073eu9i36dgjm9hnkp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.swFestival"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
