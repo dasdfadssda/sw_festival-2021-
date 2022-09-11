@@ -85,38 +85,33 @@ Future<void> signOut() async { // logOut 기능
     print('logOut');
   }
 
-contentsFunction(user, Contents,_photo) async { //파이어 베이스 저장
- try{
-    final ref = FirebaseStorage.instance
-          .ref()
-          .child('file/')
-          .child(_photo+'jpg');
-          await ref.putFile(_photo);
-          final url = await ref.getDownloadURL();
- } catch (e) {
-   print('사진 업로드 실패');
- }
+contentsFunction(user,_photo,TitleController,contentsController) async { //파이어 베이스 저장 (유저 이름, 사진, 제목, 글 내용 )
+
+ // 스토리지에 먼저 사진 업로드 하는 부분.
+  final firebaseStorageRef = FirebaseStorage.instance; 
+  
+  TaskSnapshot task = await firebaseStorageRef
+  .ref() // 시작점
+  .child('post') // collection 이름
+  .child('${_photo} + ${FirebaseAuth.instance.currentUser!.displayName!}') // 업로드한 파일의 최종이름
+  .putFile(_photo!); 
+  
+  if (task != null) {
+    // 업로드 완료되면 데이터의 주소를 얻을수 있음, future object
+    var downloadUrl = await task.ref.getDownloadURL().whenComplete(() => print('사진 만들기 성공'));
+              
+    Map<String, dynamic> Contents = {
+      'title' : TitleController.text,
+      'contents' : contentsController.text,
+      'url' : downloadUrl,
+    };
+    var my_list2 = [1, 2, 3];
+                  
  await FirebaseFirestore.instance.collection('contents')
  .doc(user)
  .set(Contents)
  .whenComplete(() {
-   print('content upLoad');
+   print('업로드 성공');
    }); 
+   }
 }
-
-// Future uploadFile(_photo) async {
-//     if (_photo == null) return;
-//     final fileName = (_photo!.path);
-//     final destination = 'files/$fileName';
-//     try {
-//       final ref = FirebaseStorage.instance
-//           .ref()
-//           .child('file/')
-//           .child(_photo+'jpg');
-//           await ref.putFile(_photo);
-//           final url = await ref.getDownloadURL();
-//       //await ref.getDownloadURL();
-//     } catch (e) {
-//       print('사진 업로드 실패');
-//     }
-//   }
