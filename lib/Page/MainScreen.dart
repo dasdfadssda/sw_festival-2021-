@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sw_festival/service/add.dart';
+import 'package:sw_festival/Page/add.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
            Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => kMyApp()),
+                builder: (context) => AddPage()),
           );
         },
         label: const Text('글 쓰기',style: TextStyle(fontWeight: FontWeight.bold),),

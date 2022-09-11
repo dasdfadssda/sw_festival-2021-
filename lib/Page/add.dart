@@ -9,8 +9,8 @@ import 'package:sw_festival/Auth/auth_service.dart';
 import 'package:sw_festival/HomePage.dart';
 
 
-class kMyApp extends StatelessWidget {
-  const kMyApp({Key? key}) : super(key: key);
+class AddPage extends StatelessWidget {
+  const AddPage({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override

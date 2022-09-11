@@ -97,21 +97,24 @@ contentsFunction(user,_photo,TitleController,contentsController) async { //파�
   .putFile(_photo!); 
   
   if (task != null) {
-    // 업로드 완료되면 데이터의 주소를 얻을수 있음, future object
-    var downloadUrl = await task.ref.getDownloadURL().whenComplete(() => print('사진 만들기 성공'));
-              
-    Map<String, dynamic> Contents = {
-      'title' : TitleController.text,
-      'contents' : contentsController.text,
-      'url' : downloadUrl,
-    };
-    var my_list2 = [1, 2, 3];
-                  
- await FirebaseFirestore.instance.collection('contents')
- .doc(user)
- .set(Contents)
- .whenComplete(() {
-   print('업로드 성공');
-   }); 
-   }
+    var downloadUrl = await task.ref.getDownloadURL().whenComplete(() => print('사진 만들기 성공'));  
+      var doc = FirebaseFirestore.instance.collection('contents').doc(); 
+      doc.set({
+        'id': doc.id,
+        'datetime' : DateTime.now().toString(),
+        'displayName':FirebaseAuth.instance.currentUser!.displayName!,
+        'title' : TitleController.text,
+        'contents' : contentsController.text,
+        'imageUrl' : downloadUrl
+      }).whenComplete(() => print('데이터 저장 성공'));
+
+      Map<String, dynamic> Contents = { // map 형태로 저장 
+        'title' : TitleController.text,
+        'contents' : contentsController.text,
+        'imageUrl' : downloadUrl,
+        'datetime' : DateTime.now().toString(),
+        'id': doc.id,
+      };
+    }
+
 }
