@@ -1,6 +1,8 @@
 
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sw_festival/Auth/auth_service.dart';
@@ -37,6 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
    File? _photo;
    final ImagePicker _picker = ImagePicker();
 
+
+
 // 사진 가져오기
   Future imgFromGallery() async {
     final image = await _picker.pickImage(
@@ -46,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
      this._photo = imagePhoto;
     });
+    
   }
 // 카메라에서 가져오기
     Future imgFromCamera() async {
@@ -72,14 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
       actions: [
         TextButton(
               onPressed: () async{
-                // uploadFile(_photo);
-                 final Contents = <String, String>{ // 컨텐츠 구조화
-                  'title' : TitleController.text,
-                  'contents' : contentsController.text,
-                  //  'photo' : _photo
-                  }; 
-                  
-             contentsFunction(FirebaseAuth.instance.currentUser!.displayName!,Contents,_photo);
+                contentsFunction(FirebaseAuth.instance.currentUser!.displayName!,_photo,TitleController,contentsController);
              Navigator.push(
             context,
             MaterialPageRoute(
