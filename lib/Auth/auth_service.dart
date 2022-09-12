@@ -116,5 +116,4 @@ contentsFunction(user,_photo,TitleController,contentsController) async { //íŒŒì
         'id': doc.id,
       };
     }
-
 }
