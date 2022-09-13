@@ -49,7 +49,7 @@ class _MainScreenState extends State<MainScreen> {
                       onTap: () {
                          Navigator.pushNamed(context, '/detail',
                             arguments: contentsProvider.items[index]);
-                            print('detail 페이지로 이동');
+                            print('${contentsProvider.items[index].title} 페이지로 이동');
                       },
                       child: Container(
                         padding: EdgeInsets.all(10),
